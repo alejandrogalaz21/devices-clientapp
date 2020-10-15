@@ -1,11 +1,11 @@
-import React,{useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import Form from './Form'
 import axios from 'axios'
 
-function Update(props) {
+function Update() {
   const { id } = useParams()
+  const history = useHistory()
 
   const [initialValues, setInitialValues] = useState({})
 
@@ -15,24 +15,25 @@ function Update(props) {
       setInitialValues(result.data)
     }
     request(id)
-    }, [id])
+  }, [id])
 
-  
-  async function handleOnSubmit(values){
+  async function handleOnSubmit(values) {
     await axios.put(`/devices/${id}`, values)
+    history.push('/')
   }
-  
+
   return (
-    <Form 
-      submit={handleOnSubmit} 
-      initialSystemName={initialValues.system_name} 
-      initialHddCapacity={initialValues.hdd_capacity}
-      initialType={initialValues.type} />
+    <div className='flex items-center bg-white h-screen'>
+      <div className='flex-1 text-gray-700 text-center px-4 py-2 m-2'>
+        <Form
+          submit={handleOnSubmit}
+          initialSystemName={initialValues.system_name}
+          initialHddCapacity={initialValues.hdd_capacity}
+          initialType={initialValues.type}
+        />
+      </div>
+    </div>
   )
-}
-
-Update.propTypes = {
-
 }
 
 export default Update

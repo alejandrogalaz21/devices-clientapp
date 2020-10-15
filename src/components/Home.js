@@ -40,31 +40,40 @@ const Home = () => {
   }
 
   return (
-    <>
-      <div className='menu'>
-        <Link to={`/create`}>Add</Link>
-        <select onChange={e => setSearch(e.target.value)}>
-          <option value=''>All</option>
-          <option value='WINDOWS_WORKSTATION'>WINDOWS_WORKSTATION</option>
-          <option value='WINDOWS_SERVER'>WINDOWS_SERVER</option>
-          <option value='Mac'>Mac</option>
-        </select>
+    <div className='flex justify-center bg-white h-screen flex-col mx-5'>
+      <div className='flex justify-center'>
+        <div className='flex-1 text-gray-700 text-center px-4 py-2 m-2 mb-5'>
+          <select
+            className='bg-gray-200 appearance-none border-2 border-gray-200 rounded mx-2  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
+            onChange={e => setSearch(e.target.value)}>
+            <option value=''>All</option>
+            <option value='WINDOWS_WORKSTATION'>WINDOWS_WORKSTATION</option>
+            <option value='WINDOWS_SERVER'>WINDOWS_SERVER</option>
+            <option value='Mac'>Mac</option>
+          </select>
 
-        <select onChange={e => sortArray(e.target.value)}>
-          <option value='alphabetically'>System Name alphabetically</option>
-          <option value='ascending'>HDD ascending</option>
-          <option value='descending'>HDD descending</option>
-        </select>
+          <select
+            className='bg-gray-200 appearance-none border-2 border-gray-200 rounded mx-2  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
+            onChange={e => sortArray(e.target.value)}>
+            <option value='alphabetically'>System Name alphabetically</option>
+            <option value='ascending'>HDD ascending</option>
+            <option value='descending'>HDD descending</option>
+          </select>
+          <Link
+            to={`/create`}
+            className='bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded'>
+            Add
+          </Link>
+        </div>
       </div>
-
-      <div className='results'>
+      <div className='grid grid-cols-4 gap-4'>
         {data
           .filter(d => d.type.includes(search))
           .map(d => (
             <Item key={d.id} {...d} />
           ))}
       </div>
-    </>
+    </div>
   )
 }
 
