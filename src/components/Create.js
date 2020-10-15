@@ -4,18 +4,13 @@ import Form from './Form'
 import axios from 'axios'
 
 function Create(props) {
-  async function handleOnSubmit(values){
-   const result = await axios.post('/devices', values)
-   console.log(result)
+  async function handleOnSubmit(values) {
+    const result = await axios.post('/devices', values)
+    console.log(result)
   }
-  return (
-    <Form submit={handleOnSubmit} />
-  )
+  return <Form submit={handleOnSubmit} />
 }
 
-Create.propTypes = {
-
-}
+Create.propTypes = {}
 
 export default Create
-
